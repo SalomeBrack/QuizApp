@@ -7,6 +7,12 @@ using System.Threading.Tasks;
 
 namespace QuizApp.Data
 {
+	/*
+	 * Package Manager Console:
+	 * add-migration addQuizToDatabase -context QuizDbContext
+	 * update-database -context QuizDbContext
+	*/
+
 	public class QuizDbContext : DbContext
 	{
 		public QuizDbContext(DbContextOptions<QuizDbContext> options) : base(options)
