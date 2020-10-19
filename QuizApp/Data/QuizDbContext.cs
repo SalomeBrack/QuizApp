@@ -9,8 +9,8 @@ namespace QuizApp.Data
 {
 	/*
 	 * Package Manager Console:
-	 * add-migration addQuizToDatabase -context QuizDbContext
-	 * update-database -context QuizDbContext
+	 * Add-Migration Quiz -Context QuizDbContext
+	 * Update-Database -Context QuizDbContext
 	*/
 
 	public class QuizDbContext : DbContext

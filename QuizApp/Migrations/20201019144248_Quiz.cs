@@ -2,7 +2,7 @@
 
 namespace QuizApp.Migrations
 {
-    public partial class addQuizToDatabase : Migration
+    public partial class Quiz : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,6 +13,7 @@ namespace QuizApp.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
+                    Type = table.Column<int>(nullable: false),
                     Creator = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

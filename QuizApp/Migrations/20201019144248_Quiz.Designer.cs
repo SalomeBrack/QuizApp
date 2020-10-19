@@ -9,8 +9,8 @@ using QuizApp.Data;
 namespace QuizApp.Migrations
 {
     [DbContext(typeof(QuizDbContext))]
-    [Migration("20201019131943_addQuizToDatabase")]
-    partial class addQuizToDatabase
+    [Migration("20201019144248_Quiz")]
+    partial class Quiz
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,6 +32,9 @@ namespace QuizApp.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
