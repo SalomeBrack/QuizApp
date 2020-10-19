@@ -31,11 +31,16 @@ namespace QuizApp.Controllers
 
 		//POST - CREATE
 		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public IActionResult Create(Quiz obj)
 		{
-			_db.Quiz.Add(obj);
-			_db.SaveChanges();
-			return RedirectToAction("Index");
+			if (ModelState.IsValid)
+			{
+				_db.Quiz.Add(obj);
+				_db.SaveChanges();
+				return RedirectToAction("Index");
+			}
+			return View(obj);
 		}
 	}
 }
