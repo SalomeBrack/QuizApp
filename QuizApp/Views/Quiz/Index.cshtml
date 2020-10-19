@@ -1,5 +1,21 @@
-﻿@{
+﻿@model IEnumerable<QuizApp.Models.Quiz>
+@{
     ViewData["Title"] = "Quiz";
 }
 
-<h1>Quiz</h1>
+<h1>Quiz List</h1>
+
+<br />
+
+@if (Model.Count() > 0)
+{
+    @foreach (var obj in Model)
+    {
+        @obj.Name @obj.Type @obj.Creator
+    }
+    <br />
+}
+else
+{
+    <p>No quiz exists.</p>
+}
