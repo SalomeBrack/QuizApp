@@ -22,5 +22,20 @@ namespace QuizApp.Controllers
 			IEnumerable<Quiz> objList = _db.Quiz;
 			return View(objList);
 		}
+
+		//GET - CREATE
+		public IActionResult Create()
+		{
+			return View();
+		}
+
+		//POST - CREATE
+		[HttpPost]
+		public IActionResult Create(Quiz obj)
+		{
+			_db.Quiz.Add(obj);
+			_db.SaveChanges();
+			return RedirectToAction("Index");
+		}
 	}
 }
