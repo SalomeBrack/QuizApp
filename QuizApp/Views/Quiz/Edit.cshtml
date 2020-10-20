@@ -1,11 +1,11 @@
 ﻿@model QuizApp.Models.Quiz
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Create Quiz</h1>
+<h1>Edit Quiz</h1>
 
-<form method="post" asp-action="Create">
+<form method="post" asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="form-group">
@@ -26,6 +26,6 @@
         <span asp-validation-for="Creator" class="text-danger"></span>
     </div>
 
-    <input type="submit" class="btn btn-primary" value="Create" />
+    <input type="submit" class="btn btn-info" value="Update" />
     <a asp-action="Index" class="btn btn-success">Back</a>
 </form>

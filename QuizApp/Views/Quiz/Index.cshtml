@@ -17,16 +17,21 @@
                 <th>Name</th>
                 <th>Type</th>
                 <th>Creator</th>
+                <th></th>
             </tr>
         </thread>
         <tbody>
             @foreach (var obj in Model)
             {
-                <tr>
-                    <td>@obj.Name</td>
-                    <td>@obj.Type</td>
-                    <td>@obj.Creator</td>
-                </tr>
+            <tr>
+                <td>@obj.Name</td>
+                <td>@obj.Type</td>
+                <td>@obj.Creator</td>
+                <td>
+                    <a class="btn btn-info" asp-route-Id="@obj.Id" asp-action="Edit">Edit</a>
+                    <a class="btn btn-danger" asp-route-Id="@obj.Id" asp-action="Delete">Delete</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
