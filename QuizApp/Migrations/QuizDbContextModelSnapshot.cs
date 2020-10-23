@@ -49,7 +49,7 @@ namespace QuizApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Qestion");
+                    b.ToTable("Question");
                 });
 
             modelBuilder.Entity("QuizApp.Models.Quiz", b =>

@@ -21,6 +21,6 @@ namespace QuizApp.Data
 		}
 
 		public DbSet<Quiz> Quiz { get; set; }
-		public DbSet<Question> Qestion { get; set; }
+		public DbSet<Question> Question { get; set; }
 	}
 }

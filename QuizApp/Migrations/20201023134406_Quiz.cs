@@ -7,7 +7,7 @@ namespace QuizApp.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Qestion",
+                name: "Question",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -21,7 +21,7 @@ namespace QuizApp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Qestion", x => x.Id);
+                    table.PrimaryKey("PK_Question", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -43,7 +43,7 @@ namespace QuizApp.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Qestion");
+                name: "Question");
 
             migrationBuilder.DropTable(
                 name: "Quiz");
