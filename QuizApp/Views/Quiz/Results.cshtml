@@ -1,0 +1,10 @@
+﻿@model QuizApp.Models.Quiz
+@{ ViewData["Title"] = "Results"; }
+
+<h1>@Model.Title</h1>
+
+<div>No Results</div>
+
+<a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i></a>
+<a asp-route-Id="@Model.Id" asp-action="Edit" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+<a asp-route-Id="@Model.Id" asp-action="Play" class="btn btn-primary"><i class="fas fa-undo"></i></a>

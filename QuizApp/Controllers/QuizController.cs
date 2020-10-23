@@ -102,5 +102,17 @@ namespace QuizApp.Controllers
 			_db.SaveChanges();
 			return RedirectToAction("Index");
 		}
+
+		public IActionResult Play(int? id)
+		{
+			var obj = _db.Quiz.Find(id);
+			return View(obj);
+		}
+
+		public IActionResult Results(int? id)
+		{
+			var obj = _db.Quiz.Find(id);
+			return View(obj);
+		}
 	}
 }
