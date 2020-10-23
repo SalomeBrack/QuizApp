@@ -17,5 +17,7 @@ namespace QuizApp.Models
 		public int Type { get; set; }
 		[Required]
 		public string Creator { get; set; }
+
+		public ICollection<Question> Questions { get; set; }
 	}
 }
