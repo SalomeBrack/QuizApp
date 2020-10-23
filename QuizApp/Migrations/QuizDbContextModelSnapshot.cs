@@ -39,15 +39,12 @@ namespace QuizApp.Migrations
                     b.Property<string>("Answ3")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Quest")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Quiz")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("QuizId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("QuizId");
 
                     b.ToTable("Question");
                 });
@@ -59,11 +56,7 @@ namespace QuizApp.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Creator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -73,6 +66,15 @@ namespace QuizApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Quiz");
+                });
+
+            modelBuilder.Entity("QuizApp.Models.Question", b =>
+                {
+                    b.HasOne("QuizApp.Models.Quiz", "Quiz")
+                        .WithMany("Questions")
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

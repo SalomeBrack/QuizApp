@@ -14,9 +14,8 @@
     <table class="table">
         <thread>
             <tr>
-                <th>Name</th>
+                <th>Title</th>
                 <th>Type</th>
-                <th>Creator</th>
                 <th></th>
             </tr>
         </thread>
@@ -24,9 +23,8 @@
             @foreach (var obj in Model)
             {
             <tr>
-                <td>@obj.Name</td>
+                <td>@obj.Title</td>
                 <td>@obj.Type</td>
-                <td>@obj.Creator</td>
                 <td>
                     <a class="btn btn-primary" asp-route-Id="@obj.Id" asp-action="Edit"><i class="fas fa-pen"></i></a>
                     <a class="btn btn-danger" asp-route-Id="@obj.Id" asp-action="Delete"><i class="fas fa-trash"></i></a>

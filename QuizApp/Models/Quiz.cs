@@ -6,17 +6,23 @@ using System.Threading.Tasks;
 
 namespace QuizApp.Models
 {
+	public enum Type
+	{
+		Knowledge,
+		Personality,
+		Poll
+	}
+
 	public class Quiz
 	{
 		[Key]
+		[Required]
 		public int Id { get; set; }
+
 		[Required]
-		public string Name { get; set; }
+		public string Title { get; set; }
 		[Required]
-		[Range(0, 2, ErrorMessage = "Value needs to be between 0 and 2")]
-		public int Type { get; set; }
-		[Required]
-		public string Creator { get; set; }
+		public Type Type { get; set; }
 
 		public ICollection<Question> Questions { get; set; }
 	}
