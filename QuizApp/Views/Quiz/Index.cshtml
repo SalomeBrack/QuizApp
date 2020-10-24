@@ -1,27 +1,16 @@
 ﻿@model IEnumerable<QuizApp.Models.Quiz>
-@{ ViewData["Title"] = "Quiz"; }
-
-<h1>Quiz List</h1>
-
-<a asp-controller="Quiz" asp-action="Create" class="btn btn-primary">
-    <i class="fas fa-plus"></i> &nbsp; Create New Quiz
-</a>
+@{ ViewData["Title"] = "QuizApp"; }
 
 @if (Model.Count() > 0)
 {
     @foreach (var obj in Model)
     {
-        <a class="btn btn-light btn-lg btn-block" asp-route-Id="@obj.Id" asp-action="Play">
+        <a class="btn btn-light btn-lg btn-block text-left" asp-route-Id="@obj.Id" asp-action="Play">
             <div class="dropleft">
                 @{ int type = (int)obj.Type; }
-                @if (type == 0)
-                {<i class="fas fa-brain"></i> }
-                else if (type == 1)
-                { <i class="fas fa-smile"></i> }
-                else if (type == 2)
-                { <i class="fas fa-chart-pie"></i> }
-                else
-                { <i class="fas fa-play"></i>}
+                @if (type == 0) {<i class="fas fa-brain"></i> }
+                else if (type == 1) { <i class="fas fa-smile"></i> }
+                else if (type == 2) { <i class="fas fa-chart-pie"></i> }
                 &nbsp; @obj.Title
             </div>
         </a>

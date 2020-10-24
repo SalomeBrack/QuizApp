@@ -38,7 +38,7 @@ namespace QuizApp.Controllers
 			{
 				_db.Quiz.Add(obj);
 				_db.SaveChanges();
-				return RedirectToAction("Index");
+				return RedirectToAction("Play", obj);
 			}
 			return View(obj);
 		}
@@ -68,7 +68,7 @@ namespace QuizApp.Controllers
 			{
 				_db.Quiz.Update(obj);
 				_db.SaveChanges();
-				return RedirectToAction("Index");
+				return RedirectToAction("Play", obj);
 			}
 			return View(obj);
 		}
