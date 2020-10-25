@@ -39,6 +39,10 @@ namespace QuizApp.Migrations
                     b.Property<string>("Answ3")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Quest")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("QuizId")
                         .HasColumnType("int");
 

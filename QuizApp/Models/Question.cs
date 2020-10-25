@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,11 +13,18 @@ namespace QuizApp.Models
 		[Required]
 		public int Id { get; set; }
 
+		[DisplayName("Question")]
+		[Required]
+		public string Quest { get; set; }
+		[DisplayName("Correct Answer")]
 		[Required]
 		public string Answ0 { get; set; }
+		[DisplayName("Wrong Answer")]
 		[Required]
 		public string Answ1 { get; set; }
+		[DisplayName("Wrong Answer")]
 		public string Answ2 { get; set; }
+		[DisplayName("Wrong Answer")]
 		public string Answ3 { get; set; }
 
 		[Required]

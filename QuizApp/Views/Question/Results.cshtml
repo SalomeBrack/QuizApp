@@ -1,0 +1,19 @@
+﻿@model QuizApp.Models.Question
+
+<h4>
+    @Model.Quest
+    <a asp-route-Id="@Model.Id" asp-action="Edit" class="btn btn-light badge"><i class="fas fa-pen"></i></a>
+</h4>
+
+<div class="form-row">
+    <button class="btn btn-secondary col-md-3">@Model.Answ0</button>
+    <button class="btn btn-secondary col-md-3">@Model.Answ1</button>
+    @if (Model.Answ2 != null && Model.Answ2 != "")
+    {<button class="btn btn-secondary col-md-3">@Model.Answ2</button>}
+    @if (Model.Answ3 != null && Model.Answ3 != "")
+    {<button class="btn btn-secondary col-md-3">@Model.Answ3</button>}
+</div>
+
+<div class="form-row">
+    <a asp-route-Id="@Model.Id" asp-action="Play" class="btn btn-dark col-md-6">Retake quiz &nbsp;<i class="fas fa-undo"></i></a>
+</div>

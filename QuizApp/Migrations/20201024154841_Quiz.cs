@@ -26,6 +26,7 @@ namespace QuizApp.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Quest = table.Column<string>(nullable: false),
                     Answ0 = table.Column<string>(nullable: false),
                     Answ1 = table.Column<string>(nullable: false),
                     Answ2 = table.Column<string>(nullable: true),
