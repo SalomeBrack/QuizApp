@@ -9,7 +9,7 @@ using QuizApp.Data;
 namespace QuizApp.Migrations
 {
     [DbContext(typeof(QuizDbContext))]
-    [Migration("20201024154841_Quiz")]
+    [Migration("20201025190033_Quiz")]
     partial class Quiz
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,8 +50,6 @@ namespace QuizApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("QuizId");
-
                     b.ToTable("Question");
                 });
 
@@ -72,15 +70,6 @@ namespace QuizApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Quiz");
-                });
-
-            modelBuilder.Entity("QuizApp.Models.Question", b =>
-                {
-                    b.HasOne("QuizApp.Models.Quiz", "Quiz")
-                        .WithMany("Questions")
-                        .HasForeignKey("QuizId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

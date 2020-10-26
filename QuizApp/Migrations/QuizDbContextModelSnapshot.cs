@@ -48,8 +48,6 @@ namespace QuizApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("QuizId");
-
                     b.ToTable("Question");
                 });
 
@@ -70,15 +68,6 @@ namespace QuizApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Quiz");
-                });
-
-            modelBuilder.Entity("QuizApp.Models.Question", b =>
-                {
-                    b.HasOne("QuizApp.Models.Quiz", "Quiz")
-                        .WithMany("Questions")
-                        .HasForeignKey("QuizId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

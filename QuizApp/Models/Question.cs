@@ -28,6 +28,7 @@ namespace QuizApp.Models
 		public string Answ3 { get; set; }
 
 		[Required]
-		public Quiz Quiz { get; set; }
+		public int QuizId { get; set; }
+		// public Quiz Quiz { get; set; }
 	}
 }
