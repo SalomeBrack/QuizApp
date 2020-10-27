@@ -1,36 +1,37 @@
-﻿@model QuizApp.Models.Quiz
-@{ ViewData["Title"] = Model.Title; }
-
-<h4>
-    <a asp-route-Id="@Model.Id" asp-action="Play" class="btn btn-light badge"><i class="fas fa-arrow-left"></i></a>
-    Quiz Editor
-</h4>
+﻿@model Tuple<Quiz, IEnumerable<Question>>
+@{ ViewData["Title"] = Model.Item1.Title; }
 
 <form method="post" asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="form-row">
+        <h4 class="col-md-8"><a asp-route-Id="@Model.Item1.Id" asp-action="Play" class="btn btn-light badge"><i class="fas fa-arrow-left"></i></a> Quiz Editor</h4>
+        <a asp-route-Id="@Model.Item1.Id" asp-action="Delete" class="btn btn-danger col-md-2">Delete Quiz &nbsp;<i class="fas fa-trash"></i></a>
+        <button type="submit" class="btn btn-dark col-md-2">Save Changes &nbsp;<i class="fas fa-check"></i></button>
+    </div>
+
+    <div class="form-row">
         <div class="form-group col-md-9">
-            <input asp-for="Title" class="form-control" />
-            <span asp-validation-for="Title" class="text-danger"></span>
+            <input asp-for="Item1.Title" class="form-control" />
+            <span asp-validation-for="Item1.Title" class="text-danger"></span>
         </div>
 
         <div class="form-group col-md-3">
-            <select asp-for="Type" class="form-control">
+            <select asp-for="Item1.Type" class="form-control">
                 <option value="0">Knowledge</option>
                 <option value="1">Personality</option>
                 <option value="2">Poll</option>
             </select>
-            <span asp-validation-for="Type" class="text-danger"></span>
+            <span asp-validation-for="Item1.Type" class="text-danger"></span>
         </div>
     </div>
-
-    <div>
-
-    </div>
-
-    <div class="form-row">
-        <a asp-route-Id="@Model.Id" asp-action="Delete" class="btn btn-danger col-md-6">Delete Quiz &nbsp;<i class="fas fa-trash"></i></a>
-        <button type="submit" class="btn btn-dark col-md-6">Save Changes &nbsp;<i class="fas fa-check"></i></button>
-    </div>
 </form>
+
+@foreach (var obj in Model.Item2)
+{
+    <partial name="_EditQuestion" model="obj" />
+}
+
+<div class="form-row">
+    <a asp-route-Id="@Model.Item1.Id" asp-action="AddQuestion" class="btn btn-dark form-group col-md-12"><i class="fas fa-plus"></i>&nbsp; Add Question</a>
+</div>

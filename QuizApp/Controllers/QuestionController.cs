@@ -39,13 +39,13 @@ namespace QuizApp.Controllers
 			{
 				_db.Question.Add(obj);
 				_db.SaveChanges();
-				return RedirectToAction("Play", obj);
+				return RedirectToAction("Edit", obj);
 			}
 			return View(obj);
 		}
 
 		//GET - EDIT
-		public IActionResult Edit(int id)
+		public IActionResult Edit(int? id)
 		{
 			if (id == null || id == 0)
 			{

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using QuizApp.Data;
 using QuizApp.Models;
 
@@ -29,6 +30,27 @@ namespace QuizApp.Controllers
 			return View();
 		}
 
+		//GET - CREATE
+		public IActionResult AddQuestion(int? id)
+		{
+			Question obj = new Question() { QuizId = (int)id };
+			return View(obj);
+		}
+
+		//POST - CREATE
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult AddQuestion(Question obj)
+		{
+			if (ModelState.IsValid)
+			{
+				_db.Question.Add(obj);
+				_db.SaveChanges();
+				return RedirectToAction("Edit", obj);
+			}
+			return View(obj);
+		}
+
 		//POST - CREATE
 		[HttpPost]
 		[ValidateAntiForgeryToken]
@@ -38,14 +60,19 @@ namespace QuizApp.Controllers
 			{
 				_db.Quiz.Add(obj);
 				_db.SaveChanges();
-				return RedirectToAction("Play", obj);
+				return RedirectToAction("Edit", obj);
 			}
 			return View(obj);
 		}
 
 		//GET - EDIT
-		public IActionResult Edit(int id)
+		public IActionResult Edit(int? id)
 		{
+			Quiz item1 = _db.Quiz.Find(id);
+			IEnumerable<Question> item2 = _db.Question.Where(q => q.QuizId.Equals(id));
+			
+			Tuple<Quiz, IEnumerable<Question>> tuple = new Tuple<Quiz, IEnumerable<Question>>(item1, item2);
+
 			if (id == null || id == 0)
 			{
 				return NotFound();
@@ -56,7 +83,7 @@ namespace QuizApp.Controllers
 				return NotFound();
 			}
 
-			return View(obj);
+			return View(tuple);
 		}
 
 		//POST - EDIT
@@ -106,7 +133,7 @@ namespace QuizApp.Controllers
 		public IActionResult Play(int? id)
 		{
 			Quiz item1 = _db.Quiz.Find(id);
-			IEnumerable<Question> item2 = _db.Question;
+			IEnumerable<Question> item2 = _db.Question.Where(q => q.QuizId.Equals(id));
 			Tuple<Quiz, IEnumerable<Question>> tuple = new Tuple<Quiz, IEnumerable<Question>>(item1, item2);
 			return View(tuple);
 		}

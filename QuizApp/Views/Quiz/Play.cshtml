@@ -13,9 +13,19 @@
     <a asp-route-Id="@Model.Item1.Id" asp-action="Edit" class="btn btn-light badge"><i class="fas fa-pen"></i></a>
 </h4>
 
-<div>
-    <!--partial name="../Question/Play" /-->
-</div>
+@foreach (var obj in Model.Item2)
+{
+    <h5>@obj.Quest</h5>
+
+    <div class="form-row">
+        <button class="btn btn-secondary col-md-3">@obj.Answ0</button>
+        <button class="btn btn-secondary col-md-3">@obj.Answ1</button>
+        @if (obj.Answ2 != null && obj.Answ2 != "")
+        {<button class="btn btn-secondary col-md-3">@obj.Answ2</button>}
+        @if (obj.Answ3 != null && obj.Answ3 != "")
+        {<button class="btn btn-secondary col-md-3">@obj.Answ3</button>}
+    </div>
+}
 
 <div class="form-row">
     <a asp-route-Id="@Model.Item1.Id" asp-action="Results" class="btn btn-dark col-md-6">Check results &nbsp;<i class="fas fa-check"></i></a>
