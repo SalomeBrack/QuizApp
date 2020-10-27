@@ -1,13 +1,16 @@
-﻿@model QuizApp.Models.Quiz
-@{ ViewData["Title"] = Model.Title; }
+﻿@model Tuple<Quiz, IEnumerable<Question>>
+@{ ViewData["Title"] = Model.Item1.Title; }
 
 <h4>
-    @{ int type = (int)Model.Type; }
-    @if (type == 0) { <i class="fas fa-brain"></i> }
-    else if (type == 1) { <i class="fas fa-smile"></i> }
-    else if (type == 2) { <i class="fas fa-chart-pie"></i> }
-    @Model.Title
-    <a asp-route-Id="@Model.Id" asp-action="Edit" class="btn btn-light badge"><i class="fas fa-pen"></i></a>
+    @{ int type = (int)Model.Item1.Type; }
+    @if (type == 0)
+    {<i class="fas fa-brain"></i> }
+    else if (type == 1)
+    { <i class="fas fa-smile"></i> }
+    else if (type == 2)
+    { <i class="fas fa-chart-pie"></i>}
+    @Model.Item1.Title
+    <a asp-route-Id="@Model.Item1.Id" asp-action="Edit" class="btn btn-light badge"><i class="fas fa-pen"></i></a>
 </h4>
 
 <div>
@@ -15,5 +18,5 @@
 </div>
 
 <div class="form-row">
-    <a asp-route-Id="@Model.Id" asp-action="Results" class="btn btn-dark col-md-6">Check results &nbsp;<i class="fas fa-check"></i></a>
+    <a asp-route-Id="@Model.Item1.Id" asp-action="Results" class="btn btn-dark col-md-6">Check results &nbsp;<i class="fas fa-check"></i></a>
 </div>

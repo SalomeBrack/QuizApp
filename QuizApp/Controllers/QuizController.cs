@@ -105,8 +105,10 @@ namespace QuizApp.Controllers
 
 		public IActionResult Play(int? id)
 		{
-			var obj = _db.Quiz.Find(id);
-			return View(obj);
+			Quiz item1 = _db.Quiz.Find(id);
+			IEnumerable<Question> item2 = _db.Question;
+			Tuple<Quiz, IEnumerable<Question>> tuple = new Tuple<Quiz, IEnumerable<Question>>(item1, item2);
+			return View(tuple);
 		}
 
 		public IActionResult Results(int? id)
