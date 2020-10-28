@@ -33,8 +33,17 @@ namespace QuizApp.Controllers
 		//GET - CREATE
 		public IActionResult AddQuestion(int? id)
 		{
-			Question obj = new Question() { QuizId = (int)id };
-			return View(obj);
+			if(id != null && id != 0)
+			{
+				Quiz obj = _db.Quiz.Find(id);
+				Question obj2 = new Question() { QuizId = (int)id, Quest = "", Answ0 = "", Answ1 = "" };
+
+				_db.Question.Add(obj2);
+				_db.SaveChanges();
+
+				return RedirectToAction("Edit", obj);
+			}
+			return View();
 		}
 
 		//POST - CREATE
@@ -46,7 +55,9 @@ namespace QuizApp.Controllers
 			{
 				_db.Question.Add(obj);
 				_db.SaveChanges();
-				return RedirectToAction("Edit", obj);
+
+				Quiz obj2 = _db.Quiz.Find(obj.QuizId);
+				return RedirectToAction("Edit", obj2);
 			}
 			return View(obj);
 		}
