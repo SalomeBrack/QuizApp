@@ -1,22 +1,29 @@
 ﻿@model IEnumerable<QuizApp.Models.Quiz>
-@{ ViewData["Title"] = "QuizApp"; }
+@{ ViewData["Title"] = "Browse Quizzes"; }
+
+
+<form method="get" asp-action="Index" class="form-row">
+    <input type="search" name="search" class="form-control col-md-11" placeholder="Search" />
+    <button type="submit" class="btn btn-light col-md-1"><i class="fas fa-search"></i></button>
+</form><br />
 
 @if (Model.Count() > 0)
 {
     @foreach (var obj in Model)
     {
-        <a class="btn btn-light btn-lg btn-block text-left" asp-route-Id="@obj.Id" asp-action="Play">
-            <div class="dropleft">
-                @{ int type = (int)obj.Type; }
-                @if (type == 0) { <i class="fas fa-brain"></i> }
-                else if (type == 1) { <i class="fas fa-smile"></i> }
-                else if (type == 2) { <i class="fas fa-chart-pie"></i> }
-                &nbsp; @obj.Title
-            </div>
+        <a class="form-row btn btn-light btn-lg btn-block text-left" asp-route-Id="@obj.Id" asp-action="Play">
+            @{int type = (int)obj.Type;}
+            @if (type == 0) {<i class="fas fa-brain"></i>}
+            else if (type == 1) {<i class="fas fa-smile"></i>}
+            else if (type == 2) {<i class="fas fa-chart-pie"></i>}
+            &nbsp; @obj.Title<br />
+            <span class="font-italic font-weight-light">by 
+                unknown user
+            </span>
         </a>
     }
 }
 else
 {
-    <p>No quiz exists.</p>
+    <p>No quiz found.</p>
 }

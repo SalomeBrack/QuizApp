@@ -2,10 +2,10 @@
 @{ ViewData["Title"] = Model.Title; }
 
 <h4>
-    @{ int type = (int)Model.Type; }
-    @if (type == 0) {<i class="fas fa-brain"></i> }
-    else if (type == 1) { <i class="fas fa-smile"></i> }
-    else if (type == 2) { <i class="fas fa-chart-pie"></i> }
+    @{int type = (int)Model.Type;}
+    @if (type == 0) {<i class="fas fa-brain"></i>}
+    else if (type == 1) {<i class="fas fa-smile"></i>}
+    else if (type == 2) {<i class="fas fa-chart-pie"></i>}
     @Model.Title
     <a asp-route-Id="@Model.Id" asp-action="Edit" class="btn btn-light badge"><i class="fas fa-pen"></i></a>
 </h4>
