@@ -1,30 +1,44 @@
-﻿@model QuizApp.Models.Quiz
+﻿@model QuizApp.Models.Question
 @{ ViewData["Title"] = "Quiz Creator"; }
 
-<h4><i class="fas fa-pen"></i> Quiz Creator</h4>
-<br />
-
-<form method="post" asp-action="EditQuiz">
+<form method="post" asp-action="CreateQuestion">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="form-row">
-        <div class="form-group col-md-9">
-            <input asp-for="Title" class="form-control" placeholder="Title" />
-            <span asp-validation-for="Title" class="text-danger"></span>
+        <div class="form-group col-md-12">
+            <input asp-for="Quest" class="form-control" placeholder="Title" />
+            <span asp-validation-for="Quest" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <input asp-for="Answ0" class="form-control" placeholder="Title" />
+            <span asp-validation-for="Answ0" class="text-danger"></span>
         </div>
 
         <div class="form-group col-md-3">
-            <select asp-for="Type" class="form-control">
-                <option hidden selected>Type</option>
-                <option value="0">Knowledge</option>
-                <option value="1">Personality</option>
-                <option value="2">Poll</option>
-            </select>
-            <span asp-validation-for="Type" class="text-danger"></span>
+            <input asp-for="Answ1" class="form-control" placeholder="Title" />
+            <span asp-validation-for="Answ1" class="text-danger"></span>
         </div>
-    </div><br />
+
+        <div class="form-group col-md-3">
+            <input asp-for="Answ2" class="form-control" placeholder="Title" />
+            <span asp-validation-for="Answ2" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-3">
+            <input asp-for="Answ3" class="form-control" placeholder="Title" />
+            <span asp-validation-for="Answ3" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-3">
+            <input asp-for="QuizId" value="@ViewData["QuizId"]" class="form-control" placeholder="Title" hidden />
+        </div>
+    </div>
 
     <div class="form-row">
-        <button type="submit" class="btn btn-dark col-md-12">Add Questions &nbsp;<i class="fas fa-plus"></i></button>
+        <a asp-action="Index" class="btn btn-secondary col-md-6">Cancel &nbsp;<i class="fas fa-times"></i></a><!--TODO: Link zurück zum Quiz-->
+        <button type="submit" class="btn btn-dark col-md-6">Add &nbsp;<i class="fas fa-check"></i></button>
     </div>
 </form>

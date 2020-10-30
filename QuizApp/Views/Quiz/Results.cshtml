@@ -8,12 +8,12 @@
     else if (type == 2) {<i class="fas fa-chart-pie"></i>}
     @Model.Title
     <a asp-route-Id="@Model.Id" asp-action="Edit" class="btn btn-light badge"><i class="fas fa-pen"></i></a>
-</h4>
+</h4><br />
 
 <div>
     No Results
-</div>
+</div><br />
 
 <div class="form-row">
-    <a asp-route-Id="@Model.Id" asp-action="Play" class="btn btn-dark col-md-6">Retake quiz &nbsp;<i class="fas fa-undo"></i></a>
+    <a asp-route-Id="@Model.Id" asp-action="Play" class="btn btn-dark col-md-12">Retake quiz &nbsp;<i class="fas fa-undo"></i></a>
 </div>

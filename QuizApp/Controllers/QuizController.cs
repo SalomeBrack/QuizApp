@@ -22,6 +22,7 @@ namespace QuizApp.Controllers
 		[HttpGet]
 		public IActionResult Index(string? search)
 		{
+			ViewData["Search"] = search;
 			IEnumerable<Quiz> objList = _db.Quiz;
 			if (search != null && search != "")
 			{
@@ -50,19 +51,14 @@ namespace QuizApp.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult CreateQuestion(int? id)
+		public IActionResult CreateQuestion(int? quizId)
 		{
-			if (id != null && id != 0)
+			ViewData["QuizId"] = quizId;
+			if (quizId != null && quizId != 0)
 			{
-				Quiz obj = _db.Quiz.Find(id);
-				Question obj2 = new Question() { QuizId = (int)id, Quest = "", Answ0 = "", Answ1 = "" };
-
-				_db.Question.Add(obj2);
-				_db.SaveChanges();
-
-				return RedirectToAction("Edit", obj);
+				return View();
 			}
-			return View();
+			return RedirectToAction("Index");
 		}
 
 		[HttpPost]
@@ -77,16 +73,15 @@ namespace QuizApp.Controllers
 				Quiz obj2 = _db.Quiz.Find(obj.QuizId);
 				return RedirectToAction("Edit", obj2);
 			}
-			return View(obj);
+			return View(); //TODO: quizId als parameter mitgeben
 		}
 
 		[HttpGet]
 		public IActionResult Edit(int? id)
 		{
-			Quiz item1 = _db.Quiz.Find(id);
-			IEnumerable<Question> item2 = _db.Question.Where(q => q.QuizId.Equals(id));
-			Tuple<Quiz, IEnumerable<Question>> tuple = new Tuple<Quiz, IEnumerable<Question>>(item1, item2);
-
+			var item1 = _db.Quiz.Find(id);
+			var item2 = _db.Question.Where(q => q.QuizId.Equals(id));
+			var tuple = new Tuple<Quiz, IEnumerable<Question>>(item1, item2);
 			if (id == null || id == 0)
 			{
 				return NotFound();
@@ -131,6 +126,36 @@ namespace QuizApp.Controllers
 		}
 
 		[HttpGet]
+		public IActionResult EditQuestion(int? id)
+		{
+			if (id == null || id == 0)
+			{
+				return NotFound();
+			}
+			var obj = _db.Question.Find(id);
+			if (obj == null)
+			{
+				return NotFound();
+			}
+
+			return View(obj);
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult EditQuestion(Question objQuestion)
+		{
+			var objQuiz = _db.Quiz.Find(objQuestion.QuizId);
+			if (ModelState.IsValid)
+			{
+				_db.Question.Update(objQuestion);
+				_db.SaveChanges();
+				return RedirectToAction("Edit", objQuiz);
+			}
+			return RedirectToAction("Edit", objQuiz);
+		}
+
+		[HttpGet]
 		public IActionResult DeleteQuiz(int? id)
 		{
 			if (id == null || id == 0)
@@ -142,7 +167,6 @@ namespace QuizApp.Controllers
 			{
 				return NotFound();
 			}
-
 			return View(obj);
 		}
 
@@ -162,11 +186,40 @@ namespace QuizApp.Controllers
 		}
 
 		[HttpGet]
+		public IActionResult DeleteQuestion(int? id)
+		{
+			if (id == null || id == 0)
+			{
+				return NotFound();
+			}
+			var obj = _db.Question.Find(id);
+			if (obj == null)
+			{
+				return NotFound();
+			}
+			return View(obj);
+		}
+
+		[HttpPost]
+		public IActionResult DeleteQuestionPost(int? id)
+		{
+			var obj = _db.Question.Find(id);
+			var obj2 = _db.Quiz.Find(obj.QuizId);
+			if (obj == null)
+			{
+				return NotFound();
+			}
+			_db.Question.Remove(obj);
+			_db.SaveChanges();
+			return RedirectToAction("Edit", obj2);
+		}
+
+		[HttpGet]
 		public IActionResult Play(int? id)
 		{
-			Quiz item1 = _db.Quiz.Find(id);
-			IEnumerable<Question> item2 = _db.Question.Where(q => q.QuizId.Equals(id));
-			Tuple<Quiz, IEnumerable<Question>> tuple = new Tuple<Quiz, IEnumerable<Question>>(item1, item2);
+			var item1 = _db.Quiz.Find(id);
+			var item2 = _db.Question.Where(q => q.QuizId.Equals(id));
+			var tuple = new Tuple<Quiz, IEnumerable<Question>>(item1, item2);
 			return View(tuple);
 		}
 
