@@ -38,7 +38,7 @@
     </div>
 
     <div class="form-row">
-        <a asp-controller="Quiz" asp-action="Index" class="btn btn-secondary col-md-6">Cancel &nbsp;<i class="fas fa-times"></i></a><!--TODO: Link zurück zum Quiz-->
+        <a asp-route-Id="@ViewData["QuizId"]" asp-controller="Quiz" asp-action="Editor" class="btn btn-secondary col-md-6">Cancel &nbsp;<i class="fas fa-times"></i></a>
         <button type="submit" class="btn btn-dark col-md-6">Add &nbsp;<i class="fas fa-check"></i></button>
     </div>
 </form>

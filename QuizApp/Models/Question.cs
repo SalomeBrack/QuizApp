@@ -31,6 +31,6 @@ namespace QuizApp.Models
 
 		[Required]
 		public int QuizId { get; set; }
-		// public Quiz Quiz { get; set; }
+		//public Quiz Quiz { get; set; }
 	}
 }
