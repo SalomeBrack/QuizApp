@@ -24,27 +24,18 @@ namespace QuizApp.Controllers
 			return View(objList);
 		}
 
-		//GET - CREATE
-		public IActionResult Create()
+		[HttpGet]
+		public IActionResult Create(int? quizId)
 		{
-			return View();
-		}
-
-		//POST - CREATE
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public IActionResult Create(Question obj)
-		{
-			if (ModelState.IsValid)
+			ViewData["QuizId"] = quizId;
+			if (quizId != null && quizId != 0)
 			{
-				_db.Question.Add(obj);
-				_db.SaveChanges();
-				return RedirectToAction("Edit", obj);
+				return View();
 			}
-			return View(obj);
+			return RedirectToAction("Index", "Quiz");
 		}
 
-		//GET - EDIT
+		[HttpGet]
 		public IActionResult Edit(int? id)
 		{
 			if (id == null || id == 0)
@@ -60,21 +51,7 @@ namespace QuizApp.Controllers
 			return View(obj);
 		}
 
-		//POST - EDIT
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public IActionResult Edit(Question obj)
-		{
-			if (ModelState.IsValid)
-			{
-				_db.Question.Update(obj);
-				_db.SaveChanges();
-				return RedirectToAction("Play", obj);
-			}
-			return View(obj);
-		}
-
-		//GET - DELETE
+		[HttpGet]
 		public IActionResult Delete(int? id)
 		{
 			if (id == null || id == 0)
@@ -86,34 +63,50 @@ namespace QuizApp.Controllers
 			{
 				return NotFound();
 			}
-
 			return View(obj);
 		}
 
-		//POST - DELETE
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult Create(Question obj)
+		{
+			if (ModelState.IsValid)
+			{
+				_db.Question.Add(obj);
+				_db.SaveChanges();
+
+				Quiz obj2 = _db.Quiz.Find(obj.QuizId);
+				return RedirectToAction("Editor", "Quiz", obj2);
+			}
+			return View(); //TODO: quizId als parameter mitgeben
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult Edit(Question objQuestion)
+		{
+			var objQuiz = _db.Quiz.Find(objQuestion.QuizId);
+			if (ModelState.IsValid)
+			{
+				_db.Question.Update(objQuestion);
+				_db.SaveChanges();
+				return RedirectToAction("Editor", "Quiz", objQuiz);
+			}
+			return RedirectToAction("Editor", "Quiz", objQuiz);
+		}
+
 		[HttpPost]
 		public IActionResult DeletePost(int? id)
 		{
 			var obj = _db.Question.Find(id);
+			var obj2 = _db.Quiz.Find(obj.QuizId);
 			if (obj == null)
 			{
 				return NotFound();
 			}
 			_db.Question.Remove(obj);
 			_db.SaveChanges();
-			return RedirectToAction("Index");
-		}
-
-		public IActionResult Play(int? id)
-		{
-			var obj = _db.Question.Find(id);
-			return View(obj);
-		}
-
-		public IActionResult Results(int? id)
-		{
-			var obj = _db.Question.Find(id);
-			return View(obj);
+			return RedirectToAction("Editor", "Quiz", obj2);
 		}
 	}
 }

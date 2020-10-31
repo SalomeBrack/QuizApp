@@ -2,17 +2,17 @@
 @{ ViewData["Title"] = Model.Title; }
 
 <h4>
-    <a asp-route-Id="@Model.Id" asp-action="Edit" class="btn btn-light badge"><i class="fas fa-arrow-left"></i></a>
+    <a asp-route-Id="@Model.Id" asp-action="Editor" class="btn btn-light badge"><i class="fas fa-arrow-left"></i></a>
     Delete Quiz
 </h4>
 
 <p class="alert-danger">Are you sure you want to delete '@Model.Title'?</p>
 
-<form method="post" asp-action="DeleteQuizPost">
+<form method="post" asp-action="DeletePost">
     <input asp-for="Id" hidden />
 
     <div class="form-row">
-        <a asp-route-Id="@Model.Id" asp-action="Edit" class="btn btn-secondary col-md-6">Cancel &nbsp;<i class="fas fa-times"></i></a>
+        <a asp-route-Id="@Model.Id" asp-action="Editor" class="btn btn-secondary col-md-6">Cancel &nbsp;<i class="fas fa-times"></i></a>
         <button type="submit" class="btn btn-danger col-md-6">Delete &nbsp;<i class="fas fa-trash"></i></button>
     </div>
 </form>

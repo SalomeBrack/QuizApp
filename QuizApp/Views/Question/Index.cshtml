@@ -1,18 +1,1 @@
-﻿@model IEnumerable<QuizApp.Models.Question>
-@{ ViewData["Title"] = "Questions"; }
-
-@if (Model.Count() > 0)
-{
-    @foreach (var obj in Model)
-    {
-        <a class="btn btn-light btn-lg btn-block text-left" asp-route-Id="@obj.Id" asp-action="Play">
-            <div class="dropleft">
-                @obj.Quest
-            </div>
-        </a>
-    }
-}
-else
-{
-    <p>No question exists.</p>
-}
+﻿@model QuizApp.Models.Question

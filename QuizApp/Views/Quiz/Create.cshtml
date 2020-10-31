@@ -1,13 +1,13 @@
 ﻿@model QuizApp.Models.Quiz
+@{ ViewData["Title"] = "Quiz Creator"; }
 
 <form method="post" asp-action="Create">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="form-row">
-        <h4 class="col-md-8"><i class="fas fa-pen"></i> Quiz Creator</h4>
-        <button asp-action="Index" class="btn btn-secondary col-md-2">Cancel &nbsp;<i class="fas fa-times"></i></button>
-        <button type="submit" class="btn btn-dark col-md-2">Upload &nbsp;<i class="fas fa-check"></i></button>
-    </div>
+        <h4 class="col-md-10"><i class="fas fa-pen"></i> Quiz Creator</h4>
+        <a asp-action="Index" class="btn btn-secondary col-md-2">Cancel &nbsp;<i class="fas fa-times"></i></a>
+    </div><br />
 
     <div class="form-row">
         <div class="form-group col-md-9">
@@ -24,5 +24,9 @@
             </select>
             <span asp-validation-for="Type" class="text-danger"></span>
         </div>
+    </div><br />
+
+    <div class="form-row">
+        <button type="submit" class="btn btn-dark col-md-12">Create Quiz &nbsp;<i class="fas fa-plus"></i></button>
     </div>
 </form>

@@ -1,50 +1,27 @@
-﻿@model Tuple<Quiz, IEnumerable<Question>>
-@{ ViewData["Title"] = "Quiz Creator"; }
+﻿@model QuizApp.Models.Quiz
 
-<div class="form-row">
-    <h4 class="col-md-8">
-        <a asp-route-Id="@Model.Item1.Id" asp-action="Play" class="btn btn-light badge"><i class="fas fa-arrow-left"></i></a>
-        @{int type = (int)Model.Item1.Type;}
-        @if (type == 0){<i class="fas fa-brain"></i>}
-        else if (type == 1){<i class="fas fa-smile"></i>}
-        else if (type == 2){<i class="fas fa-chart-pie"></i>}
-        @Model.Item1.Title
-    </h4>
-    <a asp-route-Id="@Model.Item1.Id" asp-action="DeleteQuiz" class="btn btn-secondary col-md-2">Delete Quiz &nbsp;<i class="fas fa-trash"></i></a>
-    <a asp-route-Id="@Model.Item1.Id" asp-action="EditQuiz" class="btn btn-dark col-md-2">Edit Title &nbsp;<i class="fas fa-pen"></i></a>
-</div><br /><br />
+<form method="post" asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-@foreach (var obj in Model.Item2)
-{
-    <h5 class="rounded p-2 bg-dark text-white form-row">@obj.Quest</h5>
-    <div class="btn-group-toggle form-row" data-toggle="buttons">
-        @if (obj.Answ3 == null || obj.Answ3 == "")
-        {
-            @if (obj.Answ2 == null || obj.Answ2 == "")
-            {
-                <label class="btn btn-secondary col-md-6"><input type="radio">@obj.Answ0</label>
-                <label class="btn btn-secondary col-md-6"><input type="radio">@obj.Answ1</label>
-            }
-            else
-            {
-                <label class="btn btn-secondary col-md-4"><input type="radio">@obj.Answ0</label>
-                <label class="btn btn-secondary col-md-4"><input type="radio">@obj.Answ1</label>
-                <label class="btn btn-secondary col-md-4"><input type="radio">@obj.Answ2</label>
-            }
-        }
-        else
-        {
-            <label class="btn btn-secondary col-md-3"><input type="radio">@obj.Answ0</label>
-            <label class="btn btn-secondary col-md-3"><input type="radio">@obj.Answ1</label>
-            <label class="btn btn-secondary col-md-3"><input type="radio">@obj.Answ2</label>
-            <label class="btn btn-secondary col-md-3"><input type="radio">@obj.Answ3</label>
-        }
+    <div class="form-row">
+        <h4 class="col-md-8"><i class="fas fa-pen"></i> Quiz Creator</h4>
+        <a asp-route-Id="@Model.Id" asp-action="Edit" class="btn btn-secondary col-md-2">Cancel &nbsp;<i class="fas fa-times"></i></a>
+        <button type="submit" class="btn btn-dark col-md-2">Save Changes &nbsp;<i class="fas fa-check"></i></button>
     </div><br />
-    <a asp-action="DeleteQuestion" asp-route-Id="@obj.Id" class="btn btn-secondary col-md-2">Delete &nbsp;<i class="fas fa-trash"></i></a>
-    <a asp-route-Id="@obj.Id" asp-action="EditQuestion" class="btn btn-dark col-md-2">Edit &nbsp;<i class="fas fa-pen"></i></a>
-    <br /><br /><br /><br />
-}
 
-<div class="form-row">
-    <a asp-action="CreateQuestion" asp-route-quizId="@Model.Item1.Id" class="btn btn-dark form-group col-md-12">Add Question &nbsp;<i class="fas fa-plus"></i></a>
-</div>
+    <div class="form-row">
+        <div class="form-group col-md-9">
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-3">
+            <select asp-for="Type" class="form-control">
+                <option value="0">Knowledge</option>
+                <option value="1">Personality</option>
+                <option value="2">Poll</option>
+            </select>
+            <span asp-validation-for="Type" class="text-danger"></span>
+        </div>
+    </div>
+</form>

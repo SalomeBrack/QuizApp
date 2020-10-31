@@ -1,14 +1,18 @@
 ﻿@model Tuple<Quiz, IEnumerable<Question>>
-@{ ViewData["Title"] = Model.Item1.Title; }
+@{ ViewData["Title"] = "Quiz Creator"; }
 
-<h4>
-    @{ int type = (int)Model.Item1.Type; }
-    @if (type == 0) {<i class="fas fa-brain"></i>}
-    else if (type == 1) {<i class="fas fa-smile"></i>}
-    else if (type == 2) {<i class="fas fa-chart-pie"></i>}
-    @Model.Item1.Title
-    <a asp-route-Id="@Model.Item1.Id" asp-action="Editor" class="btn btn-light badge"><i class="fas fa-pen"></i></a>
-</h4><br />
+<div class="form-row">
+    <h4 class="col-md-8">
+        <a asp-route-Id="@Model.Item1.Id" asp-action="Play" class="btn btn-light badge"><i class="fas fa-arrow-left"></i></a>
+        @{int type = (int)Model.Item1.Type;}
+        @if (type == 0){<i class="fas fa-brain"></i>}
+        else if (type == 1){<i class="fas fa-smile"></i>}
+        else if (type == 2){<i class="fas fa-chart-pie"></i>}
+        @Model.Item1.Title
+    </h4>
+    <a asp-route-Id="@Model.Item1.Id" asp-action="Delete" class="btn btn-secondary col-md-2">Delete Quiz &nbsp;<i class="fas fa-trash"></i></a>
+    <a asp-route-Id="@Model.Item1.Id" asp-action="Edit" class="btn btn-dark col-md-2">Edit Title &nbsp;<i class="fas fa-pen"></i></a>
+</div><br /><br />
 
 @foreach (var obj in Model.Item2)
 {
@@ -35,9 +39,12 @@
             <label class="btn btn-secondary col-md-3"><input type="radio">@obj.Answ2</label>
             <label class="btn btn-secondary col-md-3"><input type="radio">@obj.Answ3</label>
         }
-    </div><br /><br /><br />
+    </div><br />
+    <a asp-controller="Question" asp-action="Delete" asp-route-Id="@obj.Id" class="btn btn-secondary col-md-2">Delete &nbsp;<i class="fas fa-trash"></i></a>
+    <a asp-route-Id="@obj.Id" asp-controller="Question" asp-action="Edit" class="btn btn-dark col-md-2">Edit &nbsp;<i class="fas fa-pen"></i></a>
+    <br /><br /><br /><br />
 }
 
 <div class="form-row">
-    <a asp-route-Id="@Model.Item1.Id" asp-action="Results" class="btn btn-dark col-md-12">Check results &nbsp;<i class="fas fa-check"></i></a>
+    <a asp-controller="Question" asp-action="Create" asp-route-quizId="@Model.Item1.Id" class="btn btn-dark form-group col-md-12">Add Question &nbsp;<i class="fas fa-plus"></i></a>
 </div>
