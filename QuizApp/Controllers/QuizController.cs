@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -10,6 +11,7 @@ using QuizApp.Models;
 
 namespace QuizApp.Controllers
 {
+	[Authorize]
 	public class QuizController : Controller
 	{
 		private readonly QuizDbContext _db;
@@ -20,6 +22,7 @@ namespace QuizApp.Controllers
 		}
 
 		[HttpGet]
+		[AllowAnonymous]
 		public IActionResult Index(string? search)
 		{
 			ViewData["Search"] = search;
@@ -32,6 +35,7 @@ namespace QuizApp.Controllers
 		}
 
 		[HttpGet]
+		[AllowAnonymous]
 		public IActionResult Play(int? id)
 		{
 			var item1 = _db.Quiz.Find(id);
@@ -41,6 +45,7 @@ namespace QuizApp.Controllers
 		}
 
 		[HttpGet]
+		[AllowAnonymous]
 		public IActionResult Results(int? id)
 		{
 			var obj = _db.Quiz.Find(id);

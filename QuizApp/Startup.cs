@@ -12,6 +12,8 @@ using QuizApp.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace QuizApp
 {
@@ -37,6 +39,10 @@ namespace QuizApp
 				.AddEntityFrameworkStores<ApplicationDbContext>();
 			services.AddControllersWithViews();
 			services.AddRazorPages();
+			services.AddMvc(options => {
+				var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+				options.Filters.Add(new AuthorizeFilter(policy)); })
+			.AddXmlSerializerFormatters();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

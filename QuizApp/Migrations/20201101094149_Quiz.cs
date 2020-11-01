@@ -31,8 +31,7 @@ namespace QuizApp.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(nullable: false),
-                    Type = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false)
+                    Type = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

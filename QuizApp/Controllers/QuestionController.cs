@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuizApp.Data;
@@ -9,6 +10,7 @@ using QuizApp.Models;
 
 namespace QuizApp.Controllers
 {
+	[Authorize]
 	public class QuestionController : Controller
 	{
 		private readonly QuizDbContext _db;
