@@ -24,6 +24,8 @@
             </select>
             <span asp-validation-for="Type" class="text-danger"></span>
         </div>
+
+        <input asp-for="UserId" value="@User.Identity.Name" hidden />
     </div><br />
 
     <div class="form-row">

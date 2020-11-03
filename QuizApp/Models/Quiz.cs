@@ -26,6 +26,8 @@ namespace QuizApp.Models
 		[Required]
 		public Type Type { get; set; }
 
+		public string UserId { get; set; }
+
 		//public ICollection<Question> Questions { get; set; }
 	}
 }

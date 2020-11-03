@@ -16,8 +16,15 @@
             else if (type == 1) {<i class="fas fa-smile"></i>}
             else if (type == 2) {<i class="fas fa-chart-pie"></i>}
             &nbsp; @obj.Title<br />
-            <span class="font-italic font-weight-light">by 
-                unknown user
+            <span class="font-italic font-weight-light">
+                @if (obj.UserId == null || obj.UserId == "")
+                {
+                    <div>by unknown user</div>
+                }
+                else
+                {
+                    <div>by @obj.UserId</div>
+                }
             </span>
         </a>
     }

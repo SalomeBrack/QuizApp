@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using QuizApp.Data;
@@ -15,10 +17,12 @@ namespace QuizApp.Controllers
 	public class QuizController : Controller
 	{
 		private readonly QuizDbContext _db;
+		private readonly UserManager<IdentityUser> userManager;
 
-		public QuizController(QuizDbContext db)
+		public QuizController(QuizDbContext db, UserManager<IdentityUser> userManager)
 		{
 			_db = db;
+			this.userManager = userManager;
 		}
 
 		[HttpGet]
@@ -53,6 +57,14 @@ namespace QuizApp.Controllers
 		}
 
 		[HttpGet]
+		public IActionResult Create()
+		{
+			var users = userManager.Users.ToList();
+			ViewBag.Users = new SelectList(users, "Id", "UserName");
+			return View();
+		}
+
+		[HttpGet]
 		public IActionResult Editor(int? id)
 		{
 			var item1 = _db.Quiz.Find(id);
@@ -69,12 +81,6 @@ namespace QuizApp.Controllers
 			}
 
 			return View(tuple);
-		}
-
-		[HttpGet]
-		public IActionResult Create()
-		{
-			return View();
 		}
 
 		[HttpGet]
